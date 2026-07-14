@@ -19,266 +19,300 @@
   
   body { 
     margin: 0; 
-    padding: 15px; 
+    padding: 10px; 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background: var(--bg); 
     color: var(--text);
-    /* キーボード対策：高さを固定せず、スクロールを許可する */
-    min-height: 100vh;
+    /* dvh を使い、キーボード出現時の画面縮小に完全に追従させる */
+    height: 100dvh;
+    width: 100vw;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+    overflow: hidden; /* スクロールを一切排除 */
   }
 
   .container {
     width: 100%;
-    max-width: 950px;
+    height: 100%;
+    max-width: 480px; /* スマホ幅に完全固定 */
     background: white;
     border-radius: 16px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
     position: relative;
-    /* キーボード表示時に最下部が隠れないための余白 */
-    margin-bottom: 60px; 
+    padding: 12px;
   }
 
-  /* アプリタイトル */
+  /* アプリタイトル（控えめに配置） */
   .app-title {
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 700;
     color: #94a3b8;
     letter-spacing: 0.05em;
+    margin-bottom: 5px;
   }
 
-  /* 基本の行配置 */
+  .main-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  /* 共通の行スタイル（超コンパクト） */
   .row {
     display: flex;
     align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
+    gap: 8px;
+    flex-wrap: nowrap;
   }
 
   .item-group {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 22px; /* 文字を少し大きく */
+    gap: 6px;
+    font-size: 16px;
     font-weight: 700;
-    white-space: nowrap;
   }
 
   .unit {
     color: #475569;
-    font-size: 18px;
+    font-size: 13px;
     white-space: nowrap;
   }
 
   .operator {
-    font-size: 26px;
+    font-size: 18px;
     font-weight: 700;
     color: #94a3b8;
-    margin: 0 5px;
     user-select: none;
   }
 
-  /* 合計バッジ */
+  /* 合計値バッジ */
   .total-badge {
     background: #f1f5f9;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-size: 16px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
     font-weight: 700;
     color: #475569;
     border: 1px solid #e2e8f0;
     white-space: nowrap;
-    display: inline-block;
-    min-width: 160px;
-    text-align: center;
   }
 
   /* ----------------------------------
-     上部：入力ゾーン
+     入力ゾーン（上部）
   ---------------------------------- */
   .input-zone {
-    padding: 50px 30px 25px 30px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2px dashed #cbd5e1;
   }
 
   .zone-tag {
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 800;
-    letter-spacing: 0.05em;
-    margin-bottom: -5px;
+    color: var(--primary);
   }
-  
-  .input-zone .zone-tag { color: var(--primary); }
 
   .label-input {
     color: var(--text);
-    min-width: 80px;
+    min-width: 50px;
   }
 
   input[type="number"] {
-    width: 130px; /* 少し幅広に */
-    height: 75px; /* タップしやすく高く */
-    font-size: 36px; /* 数字を巨大化 */
+    width: 75px;
+    height: 48px;
+    font-size: 24px;
     font-weight: 800;
     text-align: center;
     border: 2px solid var(--primary);
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: 6px;
     outline: none;
     color: var(--primary);
-    box-shadow: 0 2px 4px rgba(2, 132, 199, 0.05);
-    -webkit-appearance: none; /* iOS対策 */
   }
   input[type="number"]:focus {
     background-color: var(--primary-light);
   }
 
   /* ----------------------------------
-     下部：計算結果ゾーン
+     計算結果ゾーン（下部）
   ---------------------------------- */
   .result-zone {
-    background: var(--result-section);
-    padding: 30px 30px 35px 30px;
-    border-top: 2px dashed #cbd5e1;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 12px;
+    padding-top: 8px;
   }
 
   .result-zone .zone-tag { color: #475569; }
 
   .label-result {
     color: #475569;
-    min-width: 80px;
-  }
-  
-  .label-wide {
-    min-width: 110px;
-    color: var(--text);
+    min-width: 70px;
   }
 
   .result-box {
-    width: 130px;
-    height: 75px;
-    font-size: 36px;
+    width: 75px;
+    height: 48px;
+    font-size: 24px;
     font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
     background: transparent;
     border: 2px solid #94a3b8;
-    border-radius: 8px;
+    border-radius: 6px;
     color: var(--text);
   }
 
   .result-box.highlight {
-    border: 3px solid var(--primary);
+    border: 3.5px solid var(--primary);
     color: var(--primary);
   }
 
   .vertical-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 3px;
     align-items: flex-start;
   }
 
-  /* ボトムエリア配置 */
+  /* 最下部エリア */
   .bottom-flex {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    gap: 20px;
-    margin-top: 5px;
-    flex-wrap: wrap; /* スマホで縦に並ぶように */
+    gap: 10px;
+    margin-top: 4px;
   }
 
   .breakdown { 
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 700;
     color: #475569;
-    background: #ffffff;
-    padding: 12px 18px;
+    background: #f8fafc;
+    padding: 8px 12px;
     border-radius: 6px;
-    border-left: 5px solid var(--primary);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    align-self: flex-start;
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    max-width: 200px;
   }
   
   .date-box {
     background: #ffffff;
-    padding: 14px 28px;
-    border-radius: 12px; 
-    border: 2px solid var(--primary);
-    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);
+    padding: 6px 12px;
+    border-radius: 8px; 
+    border: 1.5px solid var(--primary);
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    min-width: 240px;
+    min-width: 150px;
+    align-items: center;
   }
   
   .date-title {
-    font-size: 15px;
+    font-size: 11px;
     color: var(--primary);
     font-weight: 800;
   }
   
   .today-text {
-    font-size: 12px;
+    font-size: 10px;
     color: #64748b;
-    font-weight: 600;
   }
 
   .end-date-val {
-    font-size: 32px;
+    font-size: 18px;
     font-weight: 900;
     color: var(--accent);
-    margin-top: 2px;
   }
   
   .warn-yellow {
     background: transparent !important;
-    border: 3px solid var(--warn-border) !important;
+    border: 2.5px solid var(--warn-border) !important;
     color: var(--warn-text) !important;
   }
 
   /* ----------------------------------
-     📱 スマホ・タブレット用レスポンシブ設定
+     ⌨️ キーボード表示時（画面の高さが低くなった場合）の2カラム自動切り替え
   ---------------------------------- */
-  @media (max-width: 768px) {
-    body { padding: 10px; }
-    .input-zone, .result-zone { padding-left: 20px; padding-right: 20px; }
+  @media (max-height: 480px) {
+    .container {
+      padding: 8px;
+    }
     
-    /* 3段目の横並びを、スマホでは崩さず縦スクロールや自動折返しに対応させる */
+    .app-title { display: none; } /* タイトルを消して高さを稼ぐ */
+
+    .main-layout {
+      flex-direction: row; /* 横型2カラムにシフト！ */
+      gap: 10px;
+    }
+
+    .input-zone {
+      width: 45%;
+      border-bottom: none;
+      border-right: 2px dashed #cbd5e1;
+      padding-bottom: 0;
+      padding-right: 10px;
+      justify-content: space-around;
+    }
+
+    .result-zone {
+      width: 55%;
+      padding-top: 0;
+      justify-content: space-around;
+    }
+
+    /* 3段目をキーボード表示時は縦並びに圧縮 */
     .result-zone .row {
       flex-direction: column;
       align-items: flex-start;
-      gap: 20px;
+      gap: 6px;
     }
-    
-    .vertical-group { width: 100%; }
-    .total-badge { margin-left: 0 !important; margin-top: 4px; display: block; text-align: left; max-width: 260px; }
-    .item-group { width: 100%; }
-    
-    /* スマホ時は演算子（＋や×）を非表示にしてスッキリさせる */
-    .operator { display: none; }
-    
-    .bottom-flex {
-      flex-direction: column;
-      align-items: stretch;
+
+    .result-zone .operator { display: none; } /* 不要な演算子を排除 */
+
+    .vertical-group {
+      flex-direction: row;
+      align-items: center;
       width: 100%;
     }
-    .date-box { width: 100%; text-align: center; }
+
+    /* バッジを右側に並べて高さを節約 */
+    .vertical-group .total-badge {
+      margin-left: 6px !important;
+      margin-top: 0 !important;
+    }
+
+    .bottom-flex {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      width: calc(45% - 12px);
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+    }
+
+    .date-box {
+      width: 100%;
+      padding: 3px;
+    }
+
+    .end-date-val {
+      font-size: 14px;
+    }
+
+    .breakdown {
+      display: none !important; /* キーボード表示時は内訳を隠して被りを防止 */
+    }
   }
 </style>
 </head>
@@ -287,88 +321,93 @@
 <div class="container">
   <div class="app-title">残薬調整アプリ</div>
 
-  <!-- 上部：入力エリア -->
-  <div class="input-zone">
-    <div class="zone-tag">▼ ここに入力</div>
-    
-    <!-- 1段目 -->
-    <div class="row">
-      <div class="item-group">
-        <span class="label-input">1日</span>
-        <input type="number" id="dose" step="any" inputmode="decimal">
-        <span class="unit">錠 (包)</span>
-      </div>
+  <div class="main-layout">
+    <!-- 入力エリア（キーボード表示時は左側） -->
+    <div class="input-zone">
+      <div class="zone-tag">▼ 入力</div>
       
-      <span class="operator">×</span>
-      
-      <div class="item-group">
-        <input type="number" id="rx" step="1" inputmode="numeric">
-        <span class="unit">日分</span>
-        <div class="total-badge" style="margin-left: 15px;">
-          元処方合計: <span id="outOriginalTotal">-</span> 錠 (包)
-        </div>
-      </div>
-    </div>
-
-    <!-- 2段目 -->
-    <div class="row">
-      <div class="item-group">
-        <span class="label-input">残薬数</span>
-        <input type="number" id="rem" step="any" inputmode="decimal">
-        <span class="unit">錠 (包)</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 下部：自動計算エリア -->
-  <div class="result-zone">
-    <div class="zone-tag">▼ 自動計算結果</div>
-    
-    <!-- 3段目 -->
-    <div class="row">
-      <!-- 変更後日数 -->
-      <div class="vertical-group">
+      <!-- 1段目 -->
+      <div class="row">
         <div class="item-group">
-          <span class="label-result label-wide">変更後日数</span>
-          <div id="outAdj" class="result-box highlight">-</div>
-          <span class="unit" style="font-weight: bold; color: var(--primary);">日分</span>
+          <span class="label-input">1日</span>
+          <input type="number" id="dose" step="any" inputmode="decimal">
+          <span class="unit">錠</span>
         </div>
-        <div class="total-badge" style="margin-left: 120px; background: #e0f2fe; border-color: #bae6fd; color: #0369a1;">
-          変更後合計: <span id="outAdjTotal">-</span> 錠 (包)
-        </div>
-      </div>
-      
-      <!-- 残薬日数 -->
-      <div class="vertical-group">
+        
+        <span class="operator">×</span>
+        
         <div class="item-group">
-          <span class="label-result">残薬日数</span>
-          <div id="outDays" class="result-box">-</div>
+          <input type="number" id="rx" step="1" inputmode="numeric">
           <span class="unit">日分</span>
         </div>
-        <div class="total-badge" style="margin-left: 90px;">
-          残薬合計: <span id="outRemDaysTotal">-</span> 錠 (包)
+      </div>
+      
+      <!-- 1段目の合計バッジ -->
+      <div class="row" style="margin-top: -4px;">
+        <div class="total-badge">
+          元合計: <span id="outOriginalTotal">-</span> 錠 (包)
         </div>
       </div>
 
-      <span class="operator" style="align-self: center; margin-bottom: 25px;">＋</span>
-
-      <!-- 端数 -->
-      <div class="item-group">
-        <span class="label-result" style="min-width: auto;">端数</span>
-        <div id="outFrac" class="result-box">-</div>
-        <span class="unit">錠 (包)</span>
+      <!-- 2段目 -->
+      <div class="row">
+        <div class="item-group">
+          <span class="label-input">残薬数</span>
+          <input type="number" id="rem" step="any" inputmode="decimal">
+          <span class="unit">錠 (包)</span>
+        </div>
       </div>
     </div>
 
-    <!-- 最下部情報 -->
-    <div class="bottom-flex">
-      <div id="outBD" class="breakdown" style="display:none;"></div>
-      <div v-else style="flex:1; min-height:1px;"></div>
+    <!-- 自動計算結果エリア（キーボード表示時は右側） -->
+    <div class="result-zone">
+      <div class="zone-tag">▼ 自動計算結果</div>
+      
+      <!-- 3段目 -->
+      <div class="row" style="align-items: flex-start; flex-wrap: nowrap;">
+        <!-- 変更後日数 -->
+        <div class="vertical-group">
+          <div class="item-group">
+            <span class="label-result">変更後</span>
+            <div id="outAdj" class="result-box highlight">-</div>
+            <span class="unit" style="font-weight: bold; color: var(--primary);">日分</span>
+          </div>
+          <div class="total-badge" style="margin-left: 55px; background: #e0f2fe; border-color: #bae6fd; color: #0369a1;">
+            後計: <span id="outAdjTotal">-</span> 錠
+          </div>
+        </div>
+        
+        <!-- 残薬日数 -->
+        <div class="vertical-group" style="margin-left: 10px;">
+          <div class="item-group">
+            <span class="label-result">残日数</span>
+            <div id="outDays" class="result-box">-</div>
+            <span class="unit">日分</span>
+          </div>
+          <div class="total-badge" style="margin-left: 55px;">
+            残計: <span id="outRemDaysTotal">-</span> 錠
+          </div>
+        </div>
 
-      <div class="date-box">
-        <div class="today-text">本日: <span id="todayDisp"></span></div>
-        <div class="date-title">飲み終わる予定日</div>
-        <div id="endDisp" class="end-date-val">-</div>
+        <span class="operator" style="margin-top: 10px; margin-left: 10px;">＋</span>
+
+        <!-- 端数 -->
+        <div class="item-group" style="margin-left: 5px;">
+          <span class="label-result" style="min-width: auto;">端数</span>
+          <div id="outFrac" class="result-box">-</div>
+          <span class="unit">錠</span>
+        </div>
+      </div>
+
+      <!-- 最下部情報（日付・内訳） -->
+      <div class="bottom-flex">
+        <div id="outBD" class="breakdown" style="display:none;"></div>
+
+        <div class="date-box">
+          <div class="today-text">本日: <span id="todayDisp"></span></div>
+          <div class="date-title">飲み終わる予定日</div>
+          <div id="endDisp" class="end-date-val">-</div>
+        </div>
       </div>
     </div>
   </div>
@@ -451,7 +490,7 @@
       bd.style.display = 'inline-block';
       const overDays = remainDays - r;
       if (hasFrac) {
-        bd.innerHTML = `内訳：処方 ${r}日 ＋ 過剰 ${overDays}日 と ${fmtFrac} 錠 (包)`;
+        bd.innerHTML = `内訳：処方 ${r}日 ＋ 過剰 ${overDays}日 と ${fmtFrac} 錠`;
       } else {
         bd.innerHTML = `内訳：処方 ${r}日 ＋ 過剰 ${overDays}日`;
       }
