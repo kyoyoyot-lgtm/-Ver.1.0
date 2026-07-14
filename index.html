@@ -19,74 +19,69 @@
   
   body { 
     margin: 0; 
-    padding: 10px; 
+    padding: 6px; 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background: var(--bg); 
     color: var(--text);
-    /* dvh を使い、キーボード出現時の画面縮小に完全に追従させる */
     height: 100dvh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* スクロールを一切排除 */
+    overflow: hidden; /* スクロールを完全に禁止 */
   }
 
   .container {
     width: 100%;
     height: 100%;
-    max-width: 480px; /* スマホ幅に完全固定 */
+    max-width: 480px;
     background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    padding: 10px;
     overflow: hidden;
-    position: relative;
-    padding: 12px;
   }
 
-  /* アプリタイトル（控えめに配置） */
   .app-title {
     font-size: 11px;
     font-weight: 700;
     color: #94a3b8;
-    letter-spacing: 0.05em;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+    text-align: left;
   }
 
   .main-layout {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100% - 15px);
     justify-content: space-between;
   }
 
-  /* 共通の行スタイル（超コンパクト） */
+  /* 共通行スタイル（極限まで薄型化） */
   .row {
     display: flex;
     align-items: center;
-    gap: 8px;
-    flex-wrap: nowrap;
+    gap: 6px;
   }
 
   .item-group {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 16px;
+    gap: 4px;
+    font-size: 15px;
     font-weight: 700;
   }
 
   .unit {
     color: #475569;
-    font-size: 13px;
+    font-size: 11px;
     white-space: nowrap;
   }
 
   .operator {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: #94a3b8;
     user-select: none;
@@ -95,9 +90,9 @@
   /* 合計値バッジ */
   .total-badge {
     background: #f1f5f9;
-    padding: 4px 8px;
+    padding: 3px 6px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     color: #475569;
     border: 1px solid #e2e8f0;
@@ -105,13 +100,13 @@
   }
 
   /* ----------------------------------
-     入力ゾーン（上部）
+     入力ゾーン
   ---------------------------------- */
   .input-zone {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding-bottom: 12px;
+    gap: 8px;
+    padding-bottom: 8px;
     border-bottom: 2px dashed #cbd5e1;
   }
 
@@ -123,16 +118,16 @@
 
   .label-input {
     color: var(--text);
-    min-width: 50px;
+    min-width: 45px;
   }
 
   input[type="number"] {
-    width: 75px;
-    height: 48px;
-    font-size: 24px;
+    width: 65px;
+    height: 38px;
+    font-size: 18px;
     font-weight: 800;
     text-align: center;
-    border: 2px solid var(--primary);
+    border: 1.5px solid var(--primary);
     background: #ffffff;
     border-radius: 6px;
     outline: none;
@@ -143,45 +138,48 @@
   }
 
   /* ----------------------------------
-     計算結果ゾーン（下部）
+     計算結果ゾーン
   ---------------------------------- */
   .result-zone {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding-top: 8px;
+    gap: 8px;
+    padding-top: 6px;
+    flex: 1;
+    justify-content: space-between;
   }
 
   .result-zone .zone-tag { color: #475569; }
 
   .label-result {
     color: #475569;
-    min-width: 70px;
+    min-width: 45px;
+    font-size: 13px;
   }
 
   .result-box {
-    width: 75px;
-    height: 48px;
-    font-size: 24px;
+    width: 65px;
+    height: 38px;
+    font-size: 18px;
     font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
     background: transparent;
-    border: 2px solid #94a3b8;
+    border: 1.5px solid #94a3b8;
     border-radius: 6px;
     color: var(--text);
   }
 
   .result-box.highlight {
-    border: 3.5px solid var(--primary);
+    border: 2.5px solid var(--primary);
     color: var(--primary);
   }
 
   .vertical-group {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 2px;
     align-items: flex-start;
   }
 
@@ -189,70 +187,67 @@
   .bottom-flex {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    gap: 10px;
-    margin-top: 4px;
+    align-items: center;
+    gap: 6px;
   }
 
   .breakdown { 
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
     color: #475569;
     background: #f8fafc;
-    padding: 8px 12px;
-    border-radius: 6px;
-    border-left: 4px solid var(--primary);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    max-width: 200px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border-left: 3px solid var(--primary);
+    max-width: 180px;
   }
   
   .date-box {
     background: #ffffff;
-    padding: 6px 12px;
-    border-radius: 8px; 
-    border: 1.5px solid var(--primary);
+    padding: 4px 8px;
+    border-radius: 6px; 
+    border: 1px solid var(--primary);
     display: flex;
     flex-direction: column;
-    min-width: 150px;
+    min-width: 120px;
     align-items: center;
   }
   
   .date-title {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--primary);
     font-weight: 800;
+    line-height: 1;
   }
   
   .today-text {
-    font-size: 10px;
+    font-size: 9px;
     color: #64748b;
+    margin-bottom: 2px;
   }
 
   .end-date-val {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 900;
     color: var(--accent);
+    margin-top: 1px;
   }
   
   .warn-yellow {
     background: transparent !important;
-    border: 2.5px solid var(--warn-border) !important;
+    border: 2px solid var(--warn-border) !important;
     color: var(--warn-text) !important;
   }
 
   /* ----------------------------------
-     ⌨️ キーボード表示時（画面の高さが低くなった場合）の2カラム自動切り替え
+     ⌨️ キーボード表示時（画面の縦が低くなった場合）の2カラム自動切り替え
   ---------------------------------- */
-  @media (max-height: 480px) {
-    .container {
-      padding: 8px;
-    }
-    
-    .app-title { display: none; } /* タイトルを消して高さを稼ぐ */
+  @media (max-height: 520px) {
+    .app-title { display: none; } /* タイトルを消して高さを確保 */
 
     .main-layout {
-      flex-direction: row; /* 横型2カラムにシフト！ */
-      gap: 10px;
+      flex-direction: row; /* 横型2カラム（左右並列）にシフト */
+      gap: 8px;
     }
 
     .input-zone {
@@ -260,24 +255,26 @@
       border-bottom: none;
       border-right: 2px dashed #cbd5e1;
       padding-bottom: 0;
-      padding-right: 10px;
+      padding-right: 8px;
       justify-content: space-around;
+      gap: 4px;
     }
 
     .result-zone {
       width: 55%;
       padding-top: 0;
       justify-content: space-around;
+      gap: 4px;
     }
 
-    /* 3段目をキーボード表示時は縦並びに圧縮 */
+    /* 3段目：キーボード時は縦に圧縮して綺麗に整列 */
     .result-zone .row {
       flex-direction: column;
       align-items: flex-start;
-      gap: 6px;
+      gap: 4px;
     }
 
-    .result-zone .operator { display: none; } /* 不要な演算子を排除 */
+    .result-zone .operator { display: none; } /* 不要な記号を非表示に */
 
     .vertical-group {
       flex-direction: row;
@@ -285,9 +282,9 @@
       width: 100%;
     }
 
-    /* バッジを右側に並べて高さを節約 */
+    /* バッジを右側に並べて縦の高さを節約 */
     .vertical-group .total-badge {
-      margin-left: 6px !important;
+      margin-left: 4px !important;
       margin-top: 0 !important;
     }
 
@@ -307,11 +304,11 @@
     }
 
     .end-date-val {
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .breakdown {
-      display: none !important; /* キーボード表示時は内訳を隠して被りを防止 */
+      display: none !important; /* 被りを防ぐためキーボード表示時は内訳を非表示に */
     }
   }
 </style>
@@ -322,7 +319,7 @@
   <div class="app-title">残薬調整アプリ</div>
 
   <div class="main-layout">
-    <!-- 入力エリア（キーボード表示時は左側） -->
+    <!-- 左側：入力ゾーン -->
     <div class="input-zone">
       <div class="zone-tag">▼ 入力</div>
       
@@ -342,8 +339,8 @@
         </div>
       </div>
       
-      <!-- 1段目の合計バッジ -->
-      <div class="row" style="margin-top: -4px;">
+      <!-- 合計バッジ -->
+      <div class="row">
         <div class="total-badge">
           元合計: <span id="outOriginalTotal">-</span> 錠 (包)
         </div>
@@ -352,14 +349,14 @@
       <!-- 2段目 -->
       <div class="row">
         <div class="item-group">
-          <span class="label-input">残薬数</span>
+          <span class="label-input">残薬</span>
           <input type="number" id="rem" step="any" inputmode="decimal">
           <span class="unit">錠 (包)</span>
         </div>
       </div>
     </div>
 
-    <!-- 自動計算結果エリア（キーボード表示時は右側） -->
+    <!-- 右側：自動計算結果ゾーン -->
     <div class="result-zone">
       <div class="zone-tag">▼ 自動計算結果</div>
       
@@ -370,29 +367,29 @@
           <div class="item-group">
             <span class="label-result">変更後</span>
             <div id="outAdj" class="result-box highlight">-</div>
-            <span class="unit" style="font-weight: bold; color: var(--primary);">日分</span>
+            <span class="unit" style="font-weight: bold; color: var(--primary);">日</span>
           </div>
-          <div class="total-badge" style="margin-left: 55px; background: #e0f2fe; border-color: #bae6fd; color: #0369a1;">
+          <div class="total-badge" style="margin-left: 45px; background: #e0f2fe; border-color: #bae6fd; color: #0369a1; min-width: 90px;">
             後計: <span id="outAdjTotal">-</span> 錠
           </div>
         </div>
         
         <!-- 残薬日数 -->
-        <div class="vertical-group" style="margin-left: 10px;">
+        <div class="vertical-group" style="margin-left: 6px;">
           <div class="item-group">
             <span class="label-result">残日数</span>
             <div id="outDays" class="result-box">-</div>
-            <span class="unit">日分</span>
+            <span class="unit">日</span>
           </div>
-          <div class="total-badge" style="margin-left: 55px;">
+          <div class="total-badge" style="margin-left: 45px; min-width: 90px;">
             残計: <span id="outRemDaysTotal">-</span> 錠
           </div>
         </div>
 
-        <span class="operator" style="margin-top: 10px; margin-left: 10px;">＋</span>
+        <span class="operator" style="margin-top: 8px; margin-left: 4px;">＋</span>
 
         <!-- 端数 -->
-        <div class="item-group" style="margin-left: 5px;">
+        <div class="item-group" style="margin-left: 2px;">
           <span class="label-result" style="min-width: auto;">端数</span>
           <div id="outFrac" class="result-box">-</div>
           <span class="unit">錠</span>
